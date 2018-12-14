@@ -6,7 +6,7 @@
     },
     {
       "text": "",
-      "Emoji": "heart_eyes"
+      "emoji": "heart_eyes"
     },
     {
       "text": "REST is part of work"
@@ -15,6 +15,7 @@
       "text": "Take a nap"
     },
     {
+      "text": "I have beer",
       "emoji": "beer"
     }
   ]
