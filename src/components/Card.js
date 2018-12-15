@@ -20,13 +20,25 @@ class Card extends Component {
 
     const emojiName = this.state.emoji ? this.state.emoji : '';
 
+    const onDeleteClickHandler = () => {
+      console.log(this.state.id);
+      this.props.onDeleteClickCallback(this.state.id);
+    }
+
     return (
       <div className="card">
         <div className="card__content">
           <p className="card__content-text">{this.state.text}</p>
           <span className="card__content-emoji">{emoji.getUnicode(emojiName)}</span>
+          <button
+            type="button"
+            aria-label="Delete"
+            className="card__delete"
+            onClick={onDeleteClickHandler}
+            >
+            Delete
+          </button>
         </div>
-
       </div>
     )
   }

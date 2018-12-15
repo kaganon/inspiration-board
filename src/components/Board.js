@@ -46,6 +46,20 @@ class Board extends Component {
     this.setState({cards: cards})
   }
 
+  deleteCard = (id) => {
+    const cards = this.state.cards;
+    console.log(id);
+
+    cards.forEach((card) => {
+      console.log(card);
+      if (id === card.card.id ) {
+        const cardIndex = cards.indexOf(card);
+        cards.splice(cardIndex, 1);
+        this.setState({cards: cards})
+      };
+    });
+  };
+
 
   render() {
     const cardList = this.state.cards.map((card, i) => {
@@ -54,9 +68,8 @@ class Board extends Component {
       return (
         <Card
           key={i}
-          id={cardData.id}
-          text={cardData.text}
-          emoji={cardData.emoji}
+          {...cardData}
+          onDeleteClickCallback={this.deleteCard}
           />
       )
     });
