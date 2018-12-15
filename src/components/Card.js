@@ -8,36 +8,23 @@ class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quote: this.props.info,
+      text: '',
+      emoji: '',
     }
   }
 
-
   render() {
 
-    const dataArray = this.state.quote.cards;
-
-    const cardData = dataArray.map((value) => {
-      console.log(value.text);
-      let pic = value.emoji;
-      let text = value.text;
-
-      if (pic) {
-        return <div className="card"> <p>{emoji.getUnicode(pic)}{text}</p></div>
-      }
-    });
-
-    //
-    // let icon = this.props.emoji;
-    // if (icon !== undefined) {
-    //   icon = emoji.getUnicode(icon);
-    // }
-
+    console.log(this.props.text);
 
     return (
-      <section>
-        {cardData}
-      </section>
+      <div className="card">
+        <div className="card__content">
+          <p className="card__content-text">{this.props.text}</p>
+          <span className="card__content-emoji">{emoji.getUnicode(this.props.emoji)}</span>
+        </div>
+
+      </div>
     )
   }
 }

@@ -16,11 +16,29 @@ class Board extends Component {
     };
   }
 
+  addCard = (newCard) => {
+    const cards = this.state.cards;
+    const card = {...newCard}
+    const fullCard = `${card.text} ${card.emoji}`
+
+    cards.push(fullCard);
+    this.setState({cards: cards})
+  }
+
+
   render() {
+
+    const cardData = CARD_DATA.cards;
+
+    const cardInfo = cardData.map((card) => {
+      return <Card text={card.text} emoji={card.emoji}/>
+    })
+
+    console.log(CARD_DATA.cards);
+
     return (
-      <div>
-        Board
-        <Card info={CARD_DATA}/>
+      <div className="board">
+        {cardInfo}
       </div>
     )
   }

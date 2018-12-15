@@ -2,17 +2,20 @@
 {
   "cards": [
     {
-      "text": "Make sure you pet a dog this week!"
+      "text": "Make sure you pet a dog this week!",
+      "emoji": "sparkles"
     },
     {
       "text": "",
       "emoji": "heart_eyes"
     },
     {
-      "text": "REST is part of work"
+      "text": "REST is part of work",
+      "emoji": "sparkles"
     },
     {
-      "text": "Take a nap"
+      "text": "Take a nap",
+      "emoji": "sparkles"
     },
     {
       "text": "I have beer",
