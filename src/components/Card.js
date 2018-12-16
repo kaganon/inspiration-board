@@ -5,12 +5,8 @@ import emoji from 'emoji-dictionary';
 import './Card.css';
 
 class Card extends Component {
-  constructor(props) {
-    super(props);
-  };
 
   render() {
-    console.log(this.props.id);
 
     const emojiName = this.props.emoji ? this.props.emoji : '';
 
@@ -36,7 +32,7 @@ class Card extends Component {
 Card.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string,
-  emoji: PropTypes.string
+  emoji: PropTypes.string,
 };
 
 export default Card;

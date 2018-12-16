@@ -18,13 +18,11 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    console.log("The component did mount");
-    const GET_ALL_CARDS_URL = `${this.props.url}/boards/katrina/cards`;
-    console.log(GET_ALL_CARDS_URL);
 
-    axios.get(GET_ALL_CARDS_URL)
+    const url = `${this.props.url}/boards/katrina/cards`;
+
+    axios.get(url)
     .then((response) => {
-      console.log(response.data);
       this.setState({
         cards: response.data,
       });
@@ -34,58 +32,49 @@ class Board extends Component {
         error: `Error: ${error.message}`,
       });
     });
-  }
+  };
+
 
   deleteCard = (id) => {
-    console.log(this.state.cards);
 
     const url = `${this.props.url}/cards/${id}`;
 
     axios.delete(url)
     .then(() => {
       const updatedCardsList = this.state.cards;
-      console.log(updatedCardsList);
       updatedCardsList.forEach((card, i) => {
         if (id === card.card.id) {
           updatedCardsList.splice(i, 1);
         };
       });
-      this.setState({cards: updatedCardsList})
-      console.log(this.state.cards);
+      this.setState({
+        cards: updatedCardsList
+      });
     })
     .catch((error) => {
       this.setState({
         error: `Error: ${error.message}`,
       });
     });
-    console.log("Cards after deleting");
-    console.log(this.state.cards);
   };
 
-  addCard = (cardData) => {
-    console.log("add card");
-    console.log(cardData);
-    const cardObj = {
-      card: cardData
-    };
-    console.log(cardData);
 
-    axios.post(`${this.props.url}/boards/katrina/cards`, cardData)
+  addCard = (cardData) => {
+
+    const url = `${this.props.url}/boards/katrina/cards`;
+
+    axios.post(url, cardData)
     .then((response) => {
       const updatedCardsList = [...this.state.cards, response.data]
       this.setState({
         cards: updatedCardsList,
       });
-      console.log("Cards after adding:");
-      console.log(this.state.cards);
     })
     .catch((error) => {
       this.setState({
         error: `Error: ${error.message}`,
       });
-      console.log(this.state.error);
     });
-
   };
 
 
@@ -102,19 +91,17 @@ class Board extends Component {
         )
     });
 
-    const hasErrors = this.state.error ? this.state.error : '';
+    const hasErrors = this.state.error ? <h3>{this.state.error}</h3> : '';
 
     return (
       <section>
         <header className="validation-errors-display">
-          <h3>
-            {hasErrors}
-          </h3>
+          {hasErrors}
         </header>
         <div className="board">
           {cardList}
-          <NewCardForm addCardCallback={this.addCard} />
         </div>
+        <NewCardForm addCardCallback={this.addCard} />
       </section>
     )
   }
@@ -123,7 +110,7 @@ class Board extends Component {
 
 
 Board.propTypes = {
-  cards: PropTypes.array.isRequired
+  cards: PropTypes.array
 };
 
 export default Board;

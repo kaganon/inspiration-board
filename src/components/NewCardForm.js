@@ -19,17 +19,9 @@ class NewCardForm extends Component {
 
 
   onInputChange = (event) => {
-    console.log("In input change");
-
     const field = event.target.name;
-    console.log(field);
-
     const value = event.target.value;
-    console.log(value);
-
     const conditionalValue = field === "emoji" ? emoji.getName(value) : value;
-
-    console.log(conditionalValue);
 
     const newState = {};
     newState[field] = conditionalValue;
@@ -42,13 +34,11 @@ class NewCardForm extends Component {
     event.preventDefault();
 
     const { id, text, emoji } = this.state;
-    console.log(id);
 
     this.props.addCardCallback(this.state);
 
     this.setState({
       text: '',
-      emoji: ''
     });
   };
 
@@ -58,19 +48,19 @@ class NewCardForm extends Component {
     const dropDownEmoji = EMOJI_LIST.map((emojiIcon, i) => {
       return (
         <option key={i}>{emoji.getUnicode(emojiIcon)}</option>
-        )
+        );
     });
 
     return (
-      <div
-        className="new-card-form"
-        >
+      <div className="new-card-form">
         <h3 className="new-card-form__header">Give me some inspo!</h3>
         <div>
+      
           <form
             className="new-card-form__form"
             onSubmit={this.onFormSubmit}
             >
+
           <div>
             <label htmlFor="text" className="new-card-form__form-label">
               Text
@@ -97,15 +87,12 @@ class NewCardForm extends Component {
 
           <input className="new-card-form__form-button" type="submit" name="submit" value="Add Card" />
         </form>
-        </div>
       </div>
-
+    </div>
     )
-  }
+  };
 
-
-
-}
+};
 
 NewCardForm.propTypes = {
   addCardCallback: PropTypes.func.isRequired
