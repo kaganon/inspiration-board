@@ -31,32 +31,35 @@ class Board extends Component {
     })
     .catch((error) => {
       this.setState({
-        error: error.message
+        error: `Error: ${error.message}`,
       });
     });
   }
 
   deleteCard = (id) => {
-
-    const updatedCardsList = this.state.cards;
-    console.log("Deleting a card");
+    console.log(this.state.cards);
 
     const url = `${this.props.url}/cards/${id}`;
 
     axios.delete(url)
     .then(() => {
+      const updatedCardsList = this.state.cards;
+      console.log(updatedCardsList);
       updatedCardsList.forEach((card, i) => {
         if (id === card.card.id) {
           updatedCardsList.splice(i, 1);
-          this.setState({cards: updatedCardsList})
         };
       });
+      this.setState({cards: updatedCardsList})
+      console.log(this.state.cards);
     })
     .catch((error) => {
       this.setState({
-        error: error.message
+        error: `Error: ${error.message}`,
       });
     });
+    console.log("Cards after deleting");
+    console.log(this.state.cards);
   };
 
   addCard = (cardData) => {
@@ -65,19 +68,24 @@ class Board extends Component {
     const cardObj = {
       card: cardData
     };
-    
+    console.log(cardData);
+
     axios.post(`${this.props.url}/boards/katrina/cards`, cardData)
     .then((response) => {
-      const updatedCardsList = [...this.state.cards, cardObj]
+      const updatedCardsList = [...this.state.cards, response.data]
       this.setState({
-        cards: updatedCardsList
-      })
+        cards: updatedCardsList,
+      });
+      console.log("Cards after adding:");
+      console.log(this.state.cards);
     })
     .catch((error) => {
       this.setState({
-        error: error.message
+        error: `Error: ${error.message}`,
       });
+      console.log(this.state.error);
     });
+
   };
 
 
@@ -91,14 +99,23 @@ class Board extends Component {
           {...cardData}
           onDeleteClickCallback={this.deleteCard}
           />
-      )
+        )
     });
 
+    const hasErrors = this.state.error ? this.state.error : '';
+
     return (
-      <div className="board">
-        {cardList}
-        <NewCardForm addCardCallback={this.addCard}/>
-      </div>
+      <section>
+        <header className="validation-errors-display">
+          <h3>
+            {hasErrors}
+          </h3>
+        </header>
+        <div className="board">
+          {cardList}
+          <NewCardForm addCardCallback={this.addCard} />
+        </div>
+      </section>
     )
   }
 
@@ -106,7 +123,7 @@ class Board extends Component {
 
 
 Board.propTypes = {
-
+  cards: PropTypes.array.isRequired
 };
 
 export default Board;

@@ -10,7 +10,8 @@ class Card extends Component {
   };
 
   render() {
-    
+    console.log(this.props.id);
+
     const emojiName = this.props.emoji ? this.props.emoji : '';
 
     return (
@@ -33,7 +34,9 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-
+  id: PropTypes.number.isRequired,
+  text: PropTypes.string,
+  emoji: PropTypes.string
 };
 
 export default Card;

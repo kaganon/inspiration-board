@@ -4,7 +4,7 @@ import emoji from 'emoji-dictionary';
 import './NewCardForm.css';
 
 
-const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog", "poop" ];
+const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog", "poop", "cookie", "doughnut" ];
 
 
 class NewCardForm extends Component {
@@ -33,6 +33,7 @@ class NewCardForm extends Component {
 
     const newState = {};
     newState[field] = conditionalValue;
+
     this.setState(newState);
   };
 
@@ -40,7 +41,8 @@ class NewCardForm extends Component {
   onFormSubmit = (event) => {
     event.preventDefault();
 
-    const { text, emoji } = this.state;
+    const { id, text, emoji } = this.state;
+    console.log(id);
 
     this.props.addCardCallback(this.state);
 
@@ -104,5 +106,10 @@ class NewCardForm extends Component {
 
 
 }
+
+NewCardForm.propTypes = {
+  addCardCallback: PropTypes.func.isRequired
+};
+
 
 export default NewCardForm;
