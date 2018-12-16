@@ -7,34 +7,24 @@ import './Card.css';
 class Card extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id: this.props.id,
-      text: this.props.text,
-      emoji: this.props.emoji,
-    }
-  }
 
+  };
 
 
   render() {
 
-    const emojiName = this.state.emoji ? this.state.emoji : '';
-
-    const onDeleteClickHandler = () => {
-      console.log(this.state.id);
-      this.props.onDeleteClickCallback(this.state.id);
-    }
+    const emojiName = this.props.emoji ? this.props.emoji : '';
 
     return (
       <div className="card">
         <div className="card__content">
-          <p className="card__content-text">{this.state.text}</p>
+          <p className="card__content-text">{this.props.text}</p>
           <span className="card__content-emoji">{emoji.getUnicode(emojiName)}</span>
           <button
             type="button"
             aria-label="Delete"
             className="card__delete"
-            onClick={onDeleteClickHandler}
+            onClick={() => this.props.onDeleteClickCallback(this.props.id)}
             >
             Delete
           </button>

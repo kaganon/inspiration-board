@@ -19,7 +19,7 @@ class Board extends Component {
 
   componentDidMount() {
     console.log("The component did mount");
-    const GET_ALL_CARDS_URL = `${this.props.url}katrina/cards`;
+    const GET_ALL_CARDS_URL = `${this.props.url}/boards/katrina/cards`;
     console.log(GET_ALL_CARDS_URL);
 
     axios.get(GET_ALL_CARDS_URL)
@@ -36,27 +36,28 @@ class Board extends Component {
     });
   }
 
-  addCard = (newCard) => {
-    const cards = this.state.cards;
-    const card = {...newCard}
-    console.log(card);
-    const fullCard = `${card.text} ${card.emoji}`
 
-    cards.push(fullCard);
-    this.setState({cards: cards})
-  }
 
   deleteCard = (id) => {
-    const cards = this.state.cards;
-    console.log(id);
 
-    cards.forEach((card) => {
-      console.log(card);
-      if (id === card.card.id ) {
-        const cardIndex = cards.indexOf(card);
-        cards.splice(cardIndex, 1);
-        this.setState({cards: cards})
-      };
+    const updatedCardsList = this.state.cards;
+    console.log("Deleting a card");
+
+    const url = `${this.props.url}/cards/${id}`;
+
+    axios.delete(url)
+    .then(() => {
+      updatedCardsList.forEach((card, i) => {
+        if (id === card.card.id) {
+          updatedCardsList.splice(i, 1);
+          this.setState({cards: updatedCardsList})
+        };
+      });
+    })
+    .catch((error) => {
+      this.setState({
+        error: error.message
+      });
     });
   };
 
