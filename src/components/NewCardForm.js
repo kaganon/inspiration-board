@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import emoji from 'emoji-dictionary';
 import './NewCardForm.css';
 
-const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
+
+const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog", "poop" ];
 
 
 class NewCardForm extends Component {
@@ -12,65 +13,90 @@ class NewCardForm extends Component {
 
     this.state = {
       text: '',
-      emoji: ''
+      emoji: '',
     };
-  }
-
+  };
 
 
   onInputChange = (event) => {
     console.log("In input change");
 
     const field = event.target.name;
+    console.log(field);
+
     const value = event.target.value;
+    console.log(value);
+
+    const conditionalValue = field === "emoji" ? emoji.getName(value) : value;
+
+    console.log(conditionalValue);
 
     const newState = {};
-    newState[field] = value;
-
+    newState[field] = conditionalValue;
     this.setState(newState);
   };
+
 
   onFormSubmit = (event) => {
     event.preventDefault();
 
-    const hasEmoji = this.state.emoji ? this.state.emoji : '';
+    const { text, emoji } = this.state;
 
-    const newCard = {
-      text: this.state.text,
-      emoji: hasEmoji,
-    };
+    this.props.addCardCallback(this.state);
 
     this.setState({
       text: '',
       emoji: ''
     });
-
-    this.props.addCardCallback(newCard);
   };
 
 
   render() {
+
+    const dropDownEmoji = EMOJI_LIST.map((emojiIcon, i) => {
+      return (
+        <option key={i}>{emoji.getUnicode(emojiIcon)}</option>
+        )
+    });
+
     return (
-      <form
+      <div
         className="new-card-form"
         >
-        <h3 className="new-card-form__header">Add a Card </h3>
+        <h3 className="new-card-form__header">Give me some inspo!</h3>
         <div>
           <form
-            className="new-card-form"
+            className="new-card-form__form"
             onSubmit={this.onFormSubmit}
             >
-          <label htmlFor="text" className="new-card-form__form-label">
-            Text
-          </label>
+          <div>
+            <label htmlFor="text" className="new-card-form__form-label">
+              Text
+            </label>
+          </div>
+
           <textarea
             name="text"
             value={this.state.text}
-            className="new-card-form__form"
+            className="new-card-form__form-textarea"
+            onChange={this.onInputChange}
             />
+
+          <label htmlFor="emoji-select">Emoji</label>
+
+          <select
+            id="emoji-select"
+            className="new-card-form__form-select"
+            onChange={this.onInputChange}
+            name="emoji"
+            >
+            {dropDownEmoji}
+          </select>
+
+          <input className="new-card-form__form-button" type="submit" name="submit" value="Add Card" />
         </form>
         </div>
-      </form>
+      </div>
 
     )
   }

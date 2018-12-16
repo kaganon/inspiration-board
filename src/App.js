@@ -4,6 +4,7 @@ import Board from './components/Board';
 import NewCardForm from './components/NewCardForm'
 
 class App extends Component {
+
   render() {
     return (
       <section>
@@ -14,7 +15,6 @@ class App extends Component {
           url="https://inspiration-board.herokuapp.com"
           boardName={`Ada-Lovelace`}
           />
-        <NewCardForm/>
       </section>
     );
   }

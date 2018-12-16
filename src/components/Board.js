@@ -36,8 +36,6 @@ class Board extends Component {
     });
   }
 
-
-
   deleteCard = (id) => {
 
     const updatedCardsList = this.state.cards;
@@ -53,6 +51,27 @@ class Board extends Component {
           this.setState({cards: updatedCardsList})
         };
       });
+    })
+    .catch((error) => {
+      this.setState({
+        error: error.message
+      });
+    });
+  };
+
+  addCard = (cardData) => {
+    console.log("add card");
+    console.log(cardData);
+    const cardObj = {
+      card: cardData
+    };
+    
+    axios.post(`${this.props.url}/boards/katrina/cards`, cardData)
+    .then((response) => {
+      const updatedCardsList = [...this.state.cards, cardObj]
+      this.setState({
+        cards: updatedCardsList
+      })
     })
     .catch((error) => {
       this.setState({
@@ -78,11 +97,13 @@ class Board extends Component {
     return (
       <div className="board">
         {cardList}
+        <NewCardForm addCardCallback={this.addCard}/>
       </div>
     )
   }
 
 }
+
 
 Board.propTypes = {
 
