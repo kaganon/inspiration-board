@@ -28,8 +28,9 @@ class Board extends Component {
       });
     })
     .catch((error) => {
+      const errors = error.response.data.errors.text;
       this.setState({
-        error: `Error: ${error.message}`,
+        error: errors,
       });
     });
   };
@@ -52,8 +53,9 @@ class Board extends Component {
       });
     })
     .catch((error) => {
+      const errors = error.response.data.errors.text;
       this.setState({
-        error: `Error: ${error.message}`,
+        error: errors,
       });
     });
   };
@@ -71,8 +73,9 @@ class Board extends Component {
       });
     })
     .catch((error) => {
+      const errors = error.response.data.errors.text;
       this.setState({
-        error: `Error: ${error.message}`,
+        error: errors,
       });
     });
   };
@@ -91,12 +94,17 @@ class Board extends Component {
         )
     });
 
-    const hasErrors = this.state.error ? <h3>{this.state.error}</h3> : '';
+
+    const errorMessages = this.state.error ? this.state.error.map((message, i) => {
+      return (<h3><li key={i}>{message}</li></h3>) }) : '';
+
 
     return (
       <section>
         <header className="validation-errors-display">
-          {hasErrors}
+          <ul className="validation-errors-display__list">
+            {errorMessages}
+          </ul>
         </header>
         <div className="board">
           {cardList}
@@ -110,7 +118,7 @@ class Board extends Component {
 
 
 Board.propTypes = {
-  cards: PropTypes.array
+  cards: PropTypes.array.isRequired,
 };
 
 export default Board;

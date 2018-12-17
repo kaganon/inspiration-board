@@ -22,7 +22,7 @@ class NewCardForm extends Component {
     const field = event.target.name;
     const value = event.target.value;
     const conditionalValue = field === "emoji" ? emoji.getName(value) : value;
-
+  
     const newState = {};
     newState[field] = conditionalValue;
 
@@ -55,7 +55,7 @@ class NewCardForm extends Component {
       <div className="new-card-form">
         <h3 className="new-card-form__header">Give me some inspo!</h3>
         <div>
-      
+
           <form
             className="new-card-form__form"
             onSubmit={this.onFormSubmit}
@@ -95,7 +95,7 @@ class NewCardForm extends Component {
 };
 
 NewCardForm.propTypes = {
-  addCardCallback: PropTypes.func.isRequired
+  addCardCallback: PropTypes.func.isRequired,
 };
 
 
