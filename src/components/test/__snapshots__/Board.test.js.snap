@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Board renders without crashing even with no cards 1`] = `
+<section>
+  <header
+    className="validation-errors-display"
+  >
+    <ul
+      className="validation-errors-display__list"
+    />
+  </header>
+  <div
+    className="board"
+  />
+  <NewCardForm
+    addCardCallback={[Function]}
+  />
+</section>
+`;
+
+exports[`Board successfully deep mounts 1`] = `
+<Board
+  cards={
+    Array [
+      Object {
+        "emoji": "cookie",
+        "text": "cookie cookie nom nom",
+      },
+      Object {
+        "emoji": "doughnut",
+        "text": "donut talk to me i am hungry",
+      },
+    ]
+  }
+>
+  <section>
+    <header
+      className="validation-errors-display"
+    >
+      <ul
+        className="validation-errors-display__list"
+      />
+    </header>
+    <div
+      className="board"
+    />
+    <NewCardForm
+      addCardCallback={[Function]}
+    >
+      <div
+        className="new-card-form"
+      >
+        <h3
+          className="new-card-form__header"
+        >
+          Give me some inspo!
+        </h3>
+        <div>
+          <form
+            className="new-card-form__form"
+            onSubmit={[Function]}
+          >
+            <div>
+              <label
+                className="new-card-form__form-label"
+                htmlFor="text"
+              >
+                Text
+              </label>
+            </div>
+            <textarea
+              className="new-card-form__form-textarea"
+              name="text"
+              onChange={[Function]}
+              value=""
+            />
+            <label
+              htmlFor="emoji-select"
+            >
+              Emoji
+            </label>
+            <select
+              className="new-card-form__form-select"
+              id="emoji-select"
+              name="emoji"
+              onChange={[Function]}
+            >
+              <option
+                key="0"
+              />
+              <option
+                key="1"
+              >
+                😍
+              </option>
+              <option
+                key="2"
+              >
+                🍺
+              </option>
+              <option
+                key="3"
+              >
+                👏
+              </option>
+              <option
+                key="4"
+              >
+                💖
+              </option>
+              <option
+                key="5"
+              >
+                😻
+              </option>
+              <option
+                key="6"
+              >
+                🐶
+              </option>
+              <option
+                key="7"
+              >
+                💩
+              </option>
+              <option
+                key="8"
+              >
+                🍪
+              </option>
+              <option
+                key="9"
+              >
+                🍩
+              </option>
+            </select>
+            <input
+              className="new-card-form__form-button"
+              name="submit"
+              type="submit"
+              value="Add Card"
+            />
+          </form>
+        </div>
+      </div>
+    </NewCardForm>
+  </section>
+</Board>
+`;
+
+exports[`Board that it matches an existing snapshot 1`] = `
+<section>
+  <header
+    className="validation-errors-display"
+  >
+    <ul
+      className="validation-errors-display__list"
+    />
+  </header>
+  <div
+    className="board"
+  />
+  <NewCardForm
+    addCardCallback={[Function]}
+  />
+</section>
+`;

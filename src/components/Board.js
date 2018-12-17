@@ -118,7 +118,7 @@ class Board extends Component {
 
 
 Board.propTypes = {
-  cards: PropTypes.array.isRequired,
+  cards: PropTypes.array,
 };
 
 export default Board;
